@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/action_bar_menu"
+>
+      <item
+          android:id="@+id/add_notification"
+          android:title="New Notification"
+          android:showAsAction="ifRoom"
+          />
+       <item
+          android:id="@+id/delete_notification"
+          android:title="Delete Notification"
+          android:showAsAction="ifRoom"
+          />		
+</menu>
