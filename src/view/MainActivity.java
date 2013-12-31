@@ -1,8 +1,12 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import com.example.notifier.R;
+
+import controller.ExpandableNotificationAdapter;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.app.NotificationManager;
@@ -18,16 +22,15 @@ import android.widget.ListView;
 public class MainActivity extends Activity {
 
 	int mId;
-	ArrayList<String> list=new ArrayList<String>();
+	ArrayList<String> listDataHeader;
+	HashMap<String, List<String>> listDataChild;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		list.add("Notificiation 1");
-		list.add("Notificiation 2");
 		setContentView(R.layout.activity_main);
 		ExpandableListView v=(ExpandableListView)this.findViewById(R.id.list);
-		ExpandableListAdapter<> adapter=new ExpandableListAdapter<>();
-		ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,list);
+		prepareListData();
+		ExpandableNotificationAdapter adapter=new ExpandableNotificationAdapter(this,listDataHeader,listDataChild);
 		v.setAdapter(adapter);
 		mId=1;
 		triggerNotification(null);
@@ -44,5 +47,35 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.action_bar_layout, menu);
 		return true;
 	}
-
+	private void prepareListData() {
+        listDataHeader = new ArrayList<String>();
+       listDataChild = new HashMap<String, List<String>>();
+ 
+        // Adding child data
+        listDataHeader.add("Sample Notification 1");
+        listDataHeader.add("Sample Notification 2");
+ 
+        // Adding child data
+        List<String> top250 = new ArrayList<String>();
+        top250.add("The Shawshank Redemption");
+        top250.add("The Godfather");
+        top250.add("The Godfather: Part II");
+        top250.add("Pulp Fiction");
+        top250.add("The Good, the Bad and the Ugly");
+        top250.add("The Dark Knight");
+        top250.add("12 Angry Men");
+ 
+        List<String> nowShowing = new ArrayList<String>();
+        nowShowing.add("The Conjuring");
+        nowShowing.add("Despicable Me 2");
+        nowShowing.add("Turbo");
+        nowShowing.add("Grown Ups 2");
+        nowShowing.add("Red 2");
+        nowShowing.add("The Wolverine");
+ 
+      
+ 
+        listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), nowShowing);
+    }
 }
