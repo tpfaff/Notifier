@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
  
 public class ExpandableNotificationAdapter extends BaseExpandableListAdapter {
@@ -45,18 +46,17 @@ public class ExpandableNotificationAdapter extends BaseExpandableListAdapter {
         final String childText = (String) getChild(groupPosition, childPosition);
  
         if (convertView == null) {
-            LayoutInflater infalInflater = (LayoutInflater) this.context
+            LayoutInflater Inflater = (LayoutInflater) this.context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.list_item, null);
-        }
- 
-        TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
- 
-        txtListChild.setText(childText);
+            	convertView=Inflater.inflate(R.layout.item_enable, null);
+            }
+        
         return convertView;
     }
  
-    @Override
+    
+
+	@Override
     public int getChildrenCount(int groupPosition) {
         return this.listChildData.get(this.listDataHeader.get(groupPosition))
                 .size();

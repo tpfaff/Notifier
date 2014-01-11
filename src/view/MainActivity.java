@@ -6,15 +6,23 @@ import java.util.List;
 
 import com.example.notifier.R;
 
+
 import controller.ExpandableNotificationAdapter;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.app.NotificationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.app.AlarmManager;
 import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -28,12 +36,40 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		ExpandableListView v=(ExpandableListView)this.findViewById(R.id.list);
+		
+		final ExpandableListView v=(ExpandableListView)this.findViewById(R.id.list);
+		ViewTreeObserver vto        =   v.getViewTreeObserver(); 
+	    vto.addOnGlobalLayoutListener(new OnGlobalLayoutListener() { 
+	    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+		@Override 
+	    public void onGlobalLayout() { 
+	        
+	    	//fillChildViewsWithSharedPrefs(v);
+	        v.getViewTreeObserver().removeOnGlobalLayoutListener(this); 
+	    } 
+	}); 
 		prepareListData();
 		ExpandableNotificationAdapter adapter=new ExpandableNotificationAdapter(this,listDataHeader,listDataChild);
 		v.setAdapter(adapter);
+		
 		mId=1;
 		triggerNotification(null);
+	}
+	
+	private void fillChildViewsWithSharedPrefs(View convertView) {
+		EditText headerEdit=(EditText)convertView.findViewById(R.id.edit_header_text);
+		EditText subtextEdit=(EditText)convertView.findViewById(R.id.edit_subtext);
+		if(headerEdit.getText()== null){ //if this field hasn't been filled yet, check if theres shared prefs,if theres not then put the default hint in 
+			//if theres sharedprefs, set them here again
+			//else
+			headerEdit.setText("Change the header text here");
+		}
+		if(subtextEdit.getText()== null){ //if this field hasn't been filled yet, check if theres shared prefs,if theres not then put the default hint in 
+			//if theres sharedprefs, set them here again
+			//else
+			subtextEdit.setText("Change the subtext here");
+		}
+		
 	}
 	private void triggerNotification(String s) {
 		NotificationCompat.Builder mBuilder=new NotificationCompat.Builder(this)
@@ -57,22 +93,25 @@ public class MainActivity extends Activity {
  
         // Adding child data
         List<String> top250 = new ArrayList<String>();
-        top250.add("The Shawshank Redemption");
-        top250.add("The Godfather");
-        top250.add("The Godfather: Part II");
-        top250.add("Pulp Fiction");
-        top250.add("The Good, the Bad and the Ugly");
+        top250.add("Option");
+       // top250.add("The Godfather");
+        
+       // top250.add("The Godfather: Part II");
+      //  top250.add("Pulp Fiction");
+        /*top250.add("The Good, the Bad and the Ugly");
         top250.add("The Dark Knight");
         top250.add("12 Angry Men");
- 
+ */
         List<String> nowShowing = new ArrayList<String>();
-        nowShowing.add("The Conjuring");
-        nowShowing.add("Despicable Me 2");
-        nowShowing.add("Turbo");
-        nowShowing.add("Grown Ups 2");
-        nowShowing.add("Red 2");
+      nowShowing.add("Option");
+      
+       // nowShowing.add("Despicable Me 2");
+       
+      //  nowShowing.add("Turbo");
+      //    nowShowing.add("Grown Ups 2");
+          /* nowShowing.add("Red 2");
         nowShowing.add("The Wolverine");
- 
+ */
       
  
         listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
