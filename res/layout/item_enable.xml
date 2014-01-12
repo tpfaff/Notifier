@@ -19,39 +19,56 @@
         android:textOn="YES"
         />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/edit_template_layout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-   		android:background="@drawable/notification_template"
         >
+
+		<ImageView
+		    android:id="@+id/notification_img_view"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+		    android:background="@drawable/notification_img_background" />
+
+		<RelativeLayout
+		    android:id="@+id/text_enter_layout"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:background="@drawable/notification_text_background"
+		    android:layout_toRightOf="@id/notification_img_view"
+		    >
 
         <EditText
             android:id="@+id/edit_header_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
             android:editable="true"
-            android:ems="10"
             android:focusable="true"
-            android:gravity="right|center_vertical"
+            android:height="10sp"
             android:inputType="text"
-            android:paddingLeft="2dp"
             android:text="Enter header text here" />
 
         <EditText
             android:id="@+id/edit_subtext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
             android:editable="true"
-            android:ems="20"
             android:focusable="true"
+            android:height="10sp"
             android:inputType="text"
-            android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
-            android:text="Enter subtext here" >
+            android:text="Enter header text here" />
 
-            <requestFocus />
-        </EditText>
+<EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
 
+</EditText>
+</RelativeLayout>
+</RelativeLayout>
 	</LinearLayout>
-</LinearLayout>
+
