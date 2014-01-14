@@ -50,7 +50,8 @@ public class ExpandableNotificationAdapter extends BaseExpandableListAdapter {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             	convertView=Inflater.inflate(R.layout.item_enable, null);
             }
-        
+        EditText headerEditText=(EditText)convertView.findViewById(R.id.edit_header_text);
+        headerEditText.setText(this.listDataHeader.get(groupPosition));
         return convertView;
     }
  
@@ -91,6 +92,8 @@ public class ExpandableNotificationAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.lblListHeader);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
+        
+     
  
         return convertView;
     }

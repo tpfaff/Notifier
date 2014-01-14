@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.example.notifier.NotificationFactory;
+import com.example.notifier.NotificationItem;
 import com.example.notifier.R;
 
 
@@ -85,6 +87,11 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	private void prepareListData() {
+		
+		NotificationItem n1 =NotificationFactory.newNotification("Sample Notification 1",
+				"Take medicine", null);
+		NotificationItem n2 = NotificationFactory.newNotification("Sample Notification 2",
+				"Pizza is done", null);
         listDataHeader = new ArrayList<String>();
        listDataChild = new HashMap<String, List<String>>();
  
@@ -99,8 +106,8 @@ public class MainActivity extends Activity {
         List<String> nowShowing = new ArrayList<String>();
       nowShowing.add("Option");
 
-        listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), nowShowing);
+        listDataChild.put(n1.getHeaderText(), top250); // Header, Child data
+        listDataChild.put(n2.getHeaderText(), nowShowing);
     }
 	
 	public void addNotificationToView(View v)

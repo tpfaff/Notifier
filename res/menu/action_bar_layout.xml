@@ -5,7 +5,6 @@ android:id="@+id/action_bar_menu"
       <item
           android:id="@+id/add_notification"
           android:title="New Notification"
-          android:onClick="addNotificationToView"
           android:showAsAction="ifRoom"
           />
        <item
